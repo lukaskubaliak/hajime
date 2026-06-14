@@ -1,0 +1,1204 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Levela | Tréningový denník pre progresívne preťažovanie</title>
+  <meta name="description" content="Levela je tréningový denník pre iPhone zameraný na svalovú hypertrofiu, progresívne preťažovanie, optimálne cvičenie, silový progres, tréningový objem a prehľadné workout plány.">
+  <meta name="theme-color" content="#111827">
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #5f6b7a;
+      --soft: #f5f7fb;
+      --card: #ffffff;
+      --line: #e3e8ef;
+      --blue: #2563eb;
+      --mint: #14b8a6;
+      --amber: #f59e0b;
+      --rose: #e11d48;
+      --shadow: 0 24px 70px rgba(17, 24, 39, .12);
+      --radius: 28px;
+      --container: 1140px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(20, 184, 166, .13), transparent 34rem),
+        radial-gradient(circle at top right, rgba(37, 99, 235, .10), transparent 30rem),
+        var(--soft);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(227, 232, 239, .75);
+      background: rgba(245, 247, 251, .84);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      color: white;
+      background: linear-gradient(135deg, var(--ink), var(--blue) 58%, var(--mint));
+      box-shadow: 0 12px 26px rgba(37, 99, 235, .25);
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      color: #445064;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--ink);
+      font-weight: 750;
+      box-shadow: 0 12px 30px rgba(17, 24, 39, .06);
+    }
+
+    .button.primary {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: white;
+    }
+
+    .hero {
+      padding: 74px 0 84px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, .78fr);
+      align-items: center;
+      gap: 64px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+      padding: 0 12px;
+      border: 1px solid rgba(20, 184, 166, .26);
+      border-radius: 999px;
+      background: rgba(20, 184, 166, .10);
+      color: #0f766e;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 18px 0 20px;
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: .98;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 20px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 30px 0 26px;
+    }
+
+    .keyword-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      max-width: 660px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid var(--line);
+      color: #475569;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .phone-wrap {
+      position: relative;
+      min-height: 670px;
+      display: grid;
+      place-items: center;
+    }
+
+    .phone-shadow {
+      position: absolute;
+      width: 70%;
+      height: 68%;
+      border-radius: 90px;
+      background: linear-gradient(145deg, rgba(20, 184, 166, .22), rgba(37, 99, 235, .18));
+      filter: blur(28px);
+      transform: rotate(-9deg);
+    }
+
+    .phone {
+      position: relative;
+      width: min(365px, 92vw);
+      aspect-ratio: 390 / 844;
+      border: 12px solid #101216;
+      border-radius: 52px;
+      background: #f8fafc;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .island {
+      position: absolute;
+      top: 13px;
+      left: 50%;
+      width: 112px;
+      height: 31px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: #101216;
+      z-index: 3;
+    }
+
+    .phone-screen {
+      height: 100%;
+      padding: 58px 18px 18px;
+      background:
+        linear-gradient(180deg, rgba(20, 184, 166, .12), transparent 178px),
+        #f8fafc;
+    }
+
+    .app-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 17px;
+    }
+
+    .app-title {
+      font-size: 25px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, .95), rgba(20, 184, 166, .95));
+      border: 3px solid white;
+      box-shadow: 0 8px 20px rgba(17, 24, 39, .15);
+    }
+
+    .start-card {
+      padding: 16px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #111827, #1d4ed8);
+      color: white;
+      box-shadow: 0 16px 36px rgba(37, 99, 235, .28);
+      margin-bottom: 14px;
+    }
+
+    .start-card strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .start-card span {
+      display: block;
+      color: rgba(255, 255, 255, .76);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .phone-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .metric {
+      min-height: 112px;
+      padding: 13px;
+      border-radius: 20px;
+      background: white;
+      border: 1px solid rgba(226, 232, 240, .95);
+      box-shadow: 0 10px 26px rgba(17, 24, 39, .06);
+    }
+
+    .metric small {
+      display: block;
+      color: #64748b;
+      font-size: 11px;
+      font-weight: 750;
+      margin-bottom: 10px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .bar {
+      width: 100%;
+      height: 7px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #e5e7eb;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--mint);
+    }
+
+    .training-list {
+      padding: 14px;
+      border-radius: 24px;
+      background: white;
+      border: 1px solid rgba(226, 232, 240, .95);
+    }
+
+    .exercise-row {
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid #eef2f7;
+    }
+
+    .exercise-row:last-child {
+      border-bottom: 0;
+    }
+
+    .exercise-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: #ecfeff;
+      color: #0f766e;
+      font-weight: 900;
+    }
+
+    .exercise-row b {
+      display: block;
+      font-size: 13px;
+      line-height: 1.1;
+    }
+
+    .exercise-row em {
+      display: block;
+      color: #64748b;
+      font-size: 11px;
+      font-style: normal;
+      font-weight: 650;
+    }
+
+    .tag {
+      color: #1d4ed8;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .bottom-nav {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      padding: 8px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, .9);
+      border: 1px solid rgba(226, 232, 240, .9);
+      box-shadow: 0 10px 28px rgba(17, 24, 39, .10);
+    }
+
+    .bottom-nav span {
+      display: grid;
+      place-items: center;
+      min-height: 36px;
+      border-radius: 16px;
+      color: #64748b;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .bottom-nav span:first-child {
+      color: white;
+      background: var(--ink);
+    }
+
+    section {
+      padding: 74px 0;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .stats {
+      margin-top: -36px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .78);
+      box-shadow: 0 18px 60px rgba(17, 24, 39, .08);
+      backdrop-filter: blur(16px);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 20px;
+      background: white;
+      border: 1px solid rgba(226, 232, 240, .9);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 28px;
+      line-height: 1;
+      margin-bottom: 7px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--card);
+      box-shadow: 0 16px 45px rgba(17, 24, 39, .06);
+    }
+
+    .feature-card {
+      padding: 24px;
+      min-height: 250px;
+    }
+
+    .feature-icon {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 22px;
+      border-radius: 16px;
+      color: white;
+      background: var(--ink);
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .feature-card:nth-child(2) .feature-icon,
+    .feature-card:nth-child(5) .feature-icon {
+      background: var(--mint);
+    }
+
+    .feature-card:nth-child(3) .feature-icon,
+    .feature-card:nth-child(6) .feature-icon {
+      background: var(--blue);
+    }
+
+    .feature-card h3,
+    .step h3,
+    .support-card h3 {
+      margin-bottom: 9px;
+      font-size: 21px;
+      line-height: 1.18;
+    }
+
+    .feature-card p,
+    .step p,
+    .support-card p,
+    .privacy p,
+    .privacy li {
+      color: var(--muted);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .step {
+      padding: 26px;
+    }
+
+    .step-number {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 22px;
+      border-radius: 50%;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-weight: 900;
+    }
+
+    .screens {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .screen-card {
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .mini-screen {
+      min-height: 380px;
+      padding: 18px;
+      border-radius: 28px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .mini-screen h3 {
+      margin-bottom: 14px;
+    }
+
+    .mini-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 54px;
+      margin-bottom: 10px;
+      padding: 12px;
+      border-radius: 17px;
+      background: white;
+      border: 1px solid #e8edf4;
+      font-weight: 760;
+    }
+
+    .mini-item span {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .line-chart {
+      display: flex;
+      align-items: end;
+      gap: 9px;
+      height: 120px;
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 20px;
+      background: white;
+      border: 1px solid #e8edf4;
+    }
+
+    .line-chart i {
+      flex: 1;
+      min-width: 0;
+      border-radius: 999px 999px 6px 6px;
+      background: linear-gradient(180deg, var(--mint), #99f6e4);
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .support-card {
+      padding: 26px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 18px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      font-weight: 780;
+    }
+
+    details {
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+    }
+
+    details:first-child {
+      padding-top: 0;
+    }
+
+    details:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 850;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details p {
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .privacy {
+      padding: 32px;
+    }
+
+    .privacy h3 {
+      margin: 28px 0 8px;
+    }
+
+    .privacy h3:first-of-type {
+      margin-top: 6px;
+    }
+
+    .privacy ul {
+      padding-left: 20px;
+    }
+
+    .privacy li + li {
+      margin-top: 7px;
+    }
+
+    .cta-panel {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      padding: 34px;
+      border-radius: 30px;
+      color: white;
+      background:
+        linear-gradient(135deg, rgba(17, 24, 39, .98), rgba(30, 64, 175, .96)),
+        var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-panel p {
+      max-width: 640px;
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, .76);
+      font-size: 18px;
+    }
+
+    .site-footer {
+      padding: 34px 0 46px;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      font-weight: 750;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 920px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid,
+      .support-grid,
+      .cta-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+
+      .phone-wrap {
+        min-height: 610px;
+      }
+
+      .stats-grid,
+      .feature-grid,
+      .steps,
+      .screens {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cta-panel .button {
+        width: fit-content;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 24px, var(--container));
+      }
+
+      .nav {
+        min-height: 66px;
+      }
+
+      .site-header .button {
+        display: none;
+      }
+
+      .hero {
+        padding: 42px 0 60px;
+      }
+
+      .hero-copy {
+        font-size: 17px;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      .phone-wrap {
+        min-height: auto;
+      }
+
+      .stats {
+        margin-top: 0;
+      }
+
+      .stats-grid,
+      .feature-grid,
+      .steps,
+      .screens {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 54px 0;
+      }
+
+      .privacy,
+      .cta-panel {
+        padding: 24px;
+      }
+
+      .footer-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Levela domov">
+        <span class="brand-mark">L</span>
+        <span>Levela</span>
+      </a>
+      <nav class="nav-links" aria-label="Hlavná navigácia">
+        <a href="#features">Funkcie</a>
+        <a href="#how">Ako funguje</a>
+        <a href="#screens">Obrazovky</a>
+        <a href="#support">Podpora</a>
+        <a href="#privacy">Privacy</a>
+      </nav>
+      <a class="button primary" href="https://apps.apple.com/" aria-label="Stiahnuť Levela v App Store">App Store</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <span class="eyebrow">Tréningový denník pre iPhone</span>
+          <h1>Meraj progres. Trénuj múdrejšie.</h1>
+          <p class="hero-copy">
+            Levela pomáha zapisovať tréningy, sledovať silový progres, plánovať optimálne cvičenie a robiť rozhodnutia podľa dát. Je postavená pre svalovú hypertrofiu, progresívne preťažovanie a dlhodobý výkon bez chaosu v poznámkach.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://apps.apple.com/">Stiahnuť v App Store</a>
+            <a class="button" href="#features">Pozrieť funkcie</a>
+          </div>
+          <div class="keyword-row" aria-label="Hlavné oblasti aplikácie">
+            <span class="pill">Svalová hypertrofia</span>
+            <span class="pill">Progresívne preťažovanie</span>
+            <span class="pill">Odhad 1RM</span>
+            <span class="pill">Workout plány</span>
+            <span class="pill">Coach Mode</span>
+          </div>
+        </div>
+
+        <div class="phone-wrap reveal" aria-label="Ukážka aplikácie Levela">
+          <div class="phone-shadow"></div>
+          <div class="phone">
+            <div class="island"></div>
+            <div class="phone-screen">
+              <div class="app-top">
+                <div>
+                  <div class="app-title">Dashboard</div>
+                  <div style="color:#64748b;font-size:12px;font-weight:750;">Upper Strength</div>
+                </div>
+                <div class="avatar"></div>
+              </div>
+              <div class="start-card">
+                <strong>Začať tréning</strong>
+                <span>Bench press, row, shoulder press, arms</span>
+              </div>
+              <div class="phone-grid">
+                <div class="metric">
+                  <small>Silový progres</small>
+                  <strong>+7.8%</strong>
+                  <div class="bar"><span style="width:78%"></span></div>
+                </div>
+                <div class="metric">
+                  <small>Efektívne série</small>
+                  <strong>12</strong>
+                  <div class="bar"><span style="width:64%;background:#2563eb"></span></div>
+                </div>
+                <div class="metric">
+                  <small>Regenerácia</small>
+                  <strong>Ready</strong>
+                  <div class="bar"><span style="width:86%;background:#f59e0b"></span></div>
+                </div>
+                <div class="metric">
+                  <small>Objem</small>
+                  <strong>8.4t</strong>
+                  <div class="bar"><span style="width:71%;background:#e11d48"></span></div>
+                </div>
+              </div>
+              <div class="training-list">
+                <div class="exercise-row">
+                  <div class="exercise-icon">BP</div>
+                  <div><b>Bench press</b><em>4 x 6-8</em></div>
+                  <div class="tag">+2.5 kg</div>
+                </div>
+                <div class="exercise-row">
+                  <div class="exercise-icon">SQ</div>
+                  <div><b>Squat</b><em>3 x 5</em></div>
+                  <div class="tag">1RM</div>
+                </div>
+                <div class="exercise-row">
+                  <div class="exercise-icon">DL</div>
+                  <div><b>Deadlift</b><em>3 x 4</em></div>
+                  <div class="tag">PR</div>
+                </div>
+              </div>
+              <div class="bottom-nav">
+                <span>Home</span>
+                <span>Plan</span>
+                <span>Cviky</span>
+                <span>Stats</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container stats reveal" aria-label="Prehľad hodnoty aplikácie">
+      <div class="stats-grid">
+        <div class="stat">
+          <b>1RM</b>
+          <span>odhad silového maxima</span>
+        </div>
+        <div class="stat">
+          <b>Objem</b>
+          <span>tonáž a pracovné série</span>
+        </div>
+        <div class="stat">
+          <b>Plány</b>
+          <span>tréning bez improvizácie</span>
+        </div>
+        <div class="stat">
+          <b>Export</b>
+          <span>dáta pripravené von</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Funkcie pre tréning, ktorý má smer.</h2>
+          <p>Levela je praktický nástroj pre ľudí, ktorí chcú mať jasno v tom, čo cvičia, prečo to cvičia a či sa skutočne zlepšujú.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="card feature-card reveal">
+            <div class="feature-icon">1</div>
+            <h3>Silový progres a odhad 1RM</h3>
+            <p>Sleduj pracovné váhy, opakovania, osobné rekordy a odhadované maximum bez ručného prepočítavania po každej sérii.</p>
+          </article>
+          <article class="card feature-card reveal">
+            <div class="feature-icon">H</div>
+            <h3>Svalová hypertrofia v dátach</h3>
+            <p>Prehľad tréningového objemu a efektívnych sérií pomáha lepšie rozložiť stimul medzi svalové partie.</p>
+          </article>
+          <article class="card feature-card reveal">
+            <div class="feature-icon">+</div>
+            <h3>Progresívne preťažovanie</h3>
+            <p>Levela ukáže, kde má zmysel pridať váhu, opakovania alebo objem, aby tréning nestál na mieste.</p>
+          </article>
+          <article class="card feature-card reveal">
+            <div class="feature-icon">C</div>
+            <h3>Coach Mode</h3>
+            <p>Prepínanie klientov a tréningové záznamy pre trénerov, ktorí potrebujú rýchly prehľad naprieč viacerými ľuďmi.</p>
+          </article>
+          <article class="card feature-card reveal">
+            <div class="feature-icon">P</div>
+            <h3>Workout plány</h3>
+            <p>Priprav si tréningy dopredu, otvor plán v gyme a zapisuj série bez zbytočného hľadania cvikov.</p>
+          </article>
+          <article class="card feature-card reveal">
+            <div class="feature-icon">E</div>
+            <h3>Export dát</h3>
+            <p>Exportuj tréningy a progres pre vlastnú analýzu, zálohu alebo zdieľanie s trénerom.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Jednoduchý workflow od prvej série po dlhodobý trend.</h2>
+          <p>Appka je navrhnutá tak, aby nerušila tréning. Rýchlo zapíšeš sériu, po tréningu vidíš kontext.</p>
+        </div>
+        <div class="steps">
+          <article class="card step reveal">
+            <div class="step-number">1</div>
+            <h3>Zapisuj série</h3>
+            <p>Vyber tréning, doplň váhu a opakovania. Levela drží posledné hodnoty poruke, aby bol zápis rýchly.</p>
+          </article>
+          <article class="card step reveal">
+            <div class="step-number">2</div>
+            <h3>Sleduj trendy</h3>
+            <p>Pozeraj sa na výkon, objem a históriu cvikov v čase. Jedna slabšia séria nie je problém, dôležitý je trend.</p>
+          </article>
+          <article class="card step reveal">
+            <div class="step-number">3</div>
+            <h3>Uprav tréning</h3>
+            <p>Podľa dát rozhodni, kedy pridať záťaž, ubrať objem alebo zmeniť plán. Cieľom je optimálne cvičenie, nie náhodný tlak.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="screens">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Prehľadné obrazovky bez tréningového šumu.</h2>
+          <p>Dashboard, tréning a cviky sú postavené okolo najčastejších rozhodnutí v posilňovni.</p>
+        </div>
+        <div class="screens">
+          <article class="card screen-card reveal">
+            <div class="mini-screen">
+              <h3>Dashboard</h3>
+              <div class="mini-item">Dnešný plán <span>Upper</span></div>
+              <div class="mini-item">Týždenný objem <span>32.6t</span></div>
+              <div class="mini-item">Najbližší cieľ <span>Bench +2.5</span></div>
+              <div class="line-chart" aria-hidden="true">
+                <i style="height:38%"></i><i style="height:54%"></i><i style="height:48%"></i><i style="height:72%"></i><i style="height:80%"></i><i style="height:64%"></i>
+              </div>
+            </div>
+          </article>
+          <article class="card screen-card reveal">
+            <div class="mini-screen">
+              <h3>Tréning</h3>
+              <div class="mini-item">Bench press <span>4 x 8</span></div>
+              <div class="mini-item">Incline row <span>3 x 10</span></div>
+              <div class="mini-item">Lateral raise <span>4 x 15</span></div>
+              <div class="mini-item">Triceps press <span>3 x 12</span></div>
+            </div>
+          </article>
+          <article class="card screen-card reveal">
+            <div class="mini-screen">
+              <h3>Cviky a história</h3>
+              <div class="mini-item">Squat <span>PR</span></div>
+              <div class="mini-item">Deadlift <span>1RM</span></div>
+              <div class="mini-item">Pull-up <span>Volume</span></div>
+              <div class="line-chart" aria-hidden="true">
+                <i style="height:45%;background:#bfdbfe"></i><i style="height:52%;background:#93c5fd"></i><i style="height:61%;background:#60a5fa"></i><i style="height:68%;background:#3b82f6"></i><i style="height:77%;background:#2563eb"></i>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="support">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Podpora</h2>
+          <p>Ak niečo nefunguje, chýba ti dôležitá funkcia alebo chceš poslať spätnú väzbu k tréningovému workflow, ozvi sa.</p>
+        </div>
+        <div class="support-grid">
+          <aside class="card support-card reveal">
+            <h3>Kontakt</h3>
+            <p>Najrýchlejší spôsob je e-mail. Do správy ideálne pridaj model iPhonu, verziu iOS a krátky popis problému.</p>
+            <div class="contact-list">
+              <a class="contact-item" href="mailto:lukas.bakuliak@gmail.com">
+                <span>Kontaktovať podporu</span>
+                <span>Napísať</span>
+              </a>
+              <a class="contact-item" href="#privacy">
+                <span>Privacy policy</span>
+                <span>Otvoriť</span>
+              </a>
+              <a class="contact-item" href="https://apps.apple.com/">
+                <span>App Store</span>
+                <span>Zobraziť</span>
+              </a>
+            </div>
+          </aside>
+          <div class="card support-card reveal">
+            <details open>
+              <summary>S čím Levela pomáha?</summary>
+              <p>So zápisom tréningov, sledovaním progresu, porovnávaním histórie cvikov, plánovaním tréningov a rozhodovaním o progresívnom preťažovaní.</p>
+            </details>
+            <details>
+              <summary>Je Levela vhodná pre začiatočníkov?</summary>
+              <p>Áno. Základný workflow je jednoduchý zápis série a kontrola trendov. Pripravované tréningové flowy majú začiatočníka viesť cvikmi krok za krokom.</p>
+            </details>
+            <details>
+              <summary>Funguje aplikácia bez účtu?</summary>
+              <p>Aktuálny koncept je lokálny a praktický: tréningové dáta sú uložené v aplikácii na zariadení, bez potreby účtu.</p>
+            </details>
+            <details>
+              <summary>Ako exportujem dáta?</summary>
+              <p>Export slúži na zálohu, vlastnú analýzu alebo zdieľanie s trénerom. Exportované sú tréningové záznamy, cviky, plány a súvisiace progres metriky.</p>
+            </details>
+            <details>
+              <summary>Ako nahlásim chybu?</summary>
+              <p>Pošli e-mail s krátkym popisom, screenshotom a krokmi, ktoré chybu vyvolali. Pomáha to problém rýchlejšie zopakovať a opraviť.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Privacy</h2>
+          <p>Zásady ochrany súkromia pre aplikáciu Levela. Posledná aktualizácia: 14. jún 2026.</p>
+        </div>
+        <article class="card privacy reveal">
+          <h3>1. Prevádzkovateľ</h3>
+          <p>Aplikáciu Levela prevádzkuje Lukas Kubaliak. V otázkach ochrany súkromia alebo podpory nás môžeš kontaktovať cez tlačidlo podpory na tejto stránke.</p>
+
+          <h3>2. Aké údaje aplikácia spracúva</h3>
+          <p>Levela môže spracúvať údaje, ktoré do aplikácie zadáš pri používaní tréningového denníka:</p>
+          <ul>
+            <li>tréningové záznamy, série, váhy, opakovania, poznámky a dátumy tréningov,</li>
+            <li>zoznam cvikov, tréningové plány, históriu výkonu a odvodené metriky ako objem alebo odhad 1RM,</li>
+            <li>profilové údaje vytvorené v aplikácii, napríklad meno klienta v Coach Mode,</li>
+            <li>exportované súbory, ak sa rozhodneš dáta exportovať alebo zdieľať.</li>
+          </ul>
+
+          <h3>3. Ako sa údaje používajú</h3>
+          <p>Údaje sa používajú na zobrazenie tréningovej histórie, výpočet progres metrík, plánovanie tréningov, sledovanie progresívneho preťažovania a zlepšenie praktického používania aplikácie.</p>
+
+          <h3>4. Ukladanie údajov</h3>
+          <p>Aktuálna verzia aplikácie je navrhnutá ako lokálny tréningový denník. Dáta sú uložené v zariadení používateľa. Ak bude v budúcnosti pridaná synchronizácia, analytika alebo cloudové funkcie, tieto zásady budú aktualizované pred ich použitím.</p>
+
+          <h3>5. Zdieľanie a export</h3>
+          <p>Levela nepredáva tréningové dáta používateľov. Ak použiješ export alebo systémové zdieľanie iOS, sám rozhoduješ, kam sa exportovaný súbor odošle a kto k nemu získa prístup.</p>
+
+          <h3>6. Tretie strany</h3>
+          <p>Táto stránka neobsahuje sledovacie skripty. Aplikácia môže používať systémové služby Apple potrebné na fungovanie iOS aplikácie a distribúciu cez App Store.</p>
+
+          <h3>7. Zdravotné upozornenie</h3>
+          <p>Levela nie je zdravotnícka pomôcka a neposkytuje lekársku diagnostiku. Tréningové odporúčania a metriky sú informačné. Pri zdravotných problémoch alebo bolestiach konzultuj tréning s odborníkom.</p>
+
+          <h3>8. Uchovávanie a vymazanie údajov</h3>
+          <p>Údaje zostávajú v aplikácii, kým ich nevymažeš alebo neodstrániš aplikáciu zo zariadenia. Exportované súbory je potrebné spravovať samostatne na miestach, kam boli uložené alebo odoslané.</p>
+
+          <h3>9. Práva používateľa</h3>
+          <p>Ak máš otázky k svojim údajom, chceš nahlásiť problém alebo požiadať o vysvetlenie fungovania aplikácie, kontaktuj nás e-mailom. Pri lokálne uložených dátach má používateľ priamu kontrolu nad dátami v zariadení.</p>
+
+          <h3>10. Zmeny zásad</h3>
+          <p>Privacy policy môže byť aktualizovaná pri zmene funkcií aplikácie, napríklad pri zavedení synchronizácie, účtov, predplatného alebo analytiky.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta-panel reveal">
+          <div>
+            <h2>Levela je pre tréning, ktorý chceš vedieť zlepšovať.</h2>
+            <p>Zapisuj tréningy rýchlo, sleduj progres jasne a rob ďalší krok podľa dát, nie podľa pocitu z poslednej série.</p>
+          </div>
+          <a class="button" href="https://apps.apple.com/">Stiahnuť v App Store</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <div>© 2026 Levela. Všetky práva vyhradené.</div>
+      <div class="footer-links">
+        <a href="#support">Podpora</a>
+        <a href="#privacy">Privacy</a>
+        <a href="mailto:lukas.bakuliak@gmail.com">Kontakt</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+  </script>
+</body>
+</html>

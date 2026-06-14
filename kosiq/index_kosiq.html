@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Košíq | Inteligentnejšie plánovanie nákupov pre iPhone</title>
+  <meta
+    name="description"
+    content="Košíq vám pomáha porovnávať ceny potravín, vytvárať lepšie nákupné zoznamy a udržiavať históriu nákupov prehľadne usporiadanú na iPhone."
+  >
+  <meta name="theme-color" content="#0F172A">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet"
+  >
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: rgba(255, 255, 255, 0.82);
+      --surface-strong: #ffffff;
+      --text: #10213a;
+      --muted: #5f7089;
+      --line: rgba(17, 34, 68, 0.08);
+      --brand: #1f6fff;
+      --brand-strong: #0b57e3;
+      --accent: #14b8a6;
+      --accent-soft: #f59e0b;
+      --ink-soft: #e8f0ff;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(31, 111, 255, 0.16), transparent 30%),
+        radial-gradient(circle at 85% 10%, rgba(20, 184, 166, 0.16), transparent 24%),
+        linear-gradient(180deg, #eef4ff 0%, #f7f9fc 42%, #ffffff 100%);
+      line-height: 1.55;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(244, 247, 251, 0.72);
+      border-bottom: 1px solid rgba(17, 34, 68, 0.05);
+    }
+
+    .site-header .shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      box-shadow: 0 10px 26px rgba(31, 111, 255, 0.22);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--text);
+      color: #fff;
+    }
+
+    .hero {
+      padding: 64px 0 44px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(17, 34, 68, 0.06);
+      color: var(--brand-strong);
+      font-size: 0.9rem;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+    }
+
+    .hero h1 {
+      margin: 18px 0 18px;
+      font-size: clamp(2.9rem, 6vw, 5.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      max-width: 10ch;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 58ch;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .hero-point {
+      padding: 11px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(17, 34, 68, 0.06);
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .button,
+    .store-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 56px;
+      padding: 0 22px;
+      border-radius: 18px;
+      font-weight: 800;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .button:hover,
+    .button:focus-visible,
+    .store-link:hover,
+    .store-link:focus-visible {
+      transform: translateY(-2px);
+    }
+
+    .store-link {
+      background: linear-gradient(135deg, var(--brand) 0%, #5e8dff 100%);
+      color: #fff;
+      box-shadow: 0 18px 34px rgba(31, 111, 255, 0.28);
+    }
+
+    .button {
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(17, 34, 68, 0.08);
+      color: var(--text);
+    }
+
+    .microcopy {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-note {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(31, 111, 255, 0.08), rgba(20, 184, 166, 0.08));
+      border: 1px solid rgba(17, 34, 68, 0.06);
+      color: var(--muted);
+    }
+
+    .hero-note strong {
+      color: var(--text);
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 24px;
+      border-radius: 36px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(242,247,255,0.88) 100%);
+      border: 1px solid rgba(17, 34, 68, 0.06);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(6px);
+    }
+
+    .hero-card::before {
+      width: 160px;
+      height: 160px;
+      right: -32px;
+      top: -32px;
+      background: rgba(31, 111, 255, 0.16);
+    }
+
+    .hero-card::after {
+      width: 150px;
+      height: 150px;
+      left: -40px;
+      bottom: -44px;
+      background: rgba(20, 184, 166, 0.14);
+    }
+
+    .hero-stack {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 620px;
+    }
+
+    .phone {
+      position: absolute;
+      width: min(31vw, 250px);
+      max-width: 250px;
+      border-radius: 32px;
+      border: 10px solid #0f172a;
+      background: #0f172a;
+      box-shadow: 0 26px 44px rgba(15, 23, 42, 0.18);
+      overflow: hidden;
+    }
+
+    .phone img {
+      width: 100%;
+      aspect-ratio: 9 / 19.5;
+      object-fit: cover;
+    }
+
+    .phone.one {
+      left: 10%;
+      top: 10%;
+      transform: rotate(-8deg);
+    }
+
+    .phone.two {
+      position: relative;
+      z-index: 2;
+      transform: translateY(18px);
+    }
+
+    .phone.three {
+      right: 10%;
+      bottom: 8%;
+      transform: rotate(8deg);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(17, 34, 68, 0.05);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      letter-spacing: -0.04em;
+    }
+
+    .stat span {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .section {
+      padding: 40px 0;
+      scroll-margin-top: 96px;
+    }
+
+    .section-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--brand-strong);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.05em;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 54ch;
+      color: var(--muted);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      padding: 26px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+      backdrop-filter: blur(12px);
+    }
+
+    .feature-badge {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, rgba(31, 111, 255, 0.14), rgba(20, 184, 166, 0.16));
+      margin-bottom: 16px;
+    }
+
+    .feature h3 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .flow-step {
+      position: relative;
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(240,246,255,0.88) 100%);
+      border: 1px solid rgba(17, 34, 68, 0.08);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+    }
+
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      inset: auto -30px -30px auto;
+      width: 90px;
+      height: 90px;
+      border-radius: 999px;
+      background: rgba(31, 111, 255, 0.08);
+    }
+
+    .flow-index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      background: var(--text);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .flow-step h3,
+    .compare-copy h3,
+    .cta-panel h2 {
+      margin: 0 0 10px;
+      letter-spacing: -0.04em;
+    }
+
+    .flow-step p,
+    .compare-copy p,
+    .compare-list li,
+    .cta-panel p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .compare-layout {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .compare-copy {
+      padding: 32px;
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at top right, rgba(31, 111, 255, 0.12), transparent 30%),
+        linear-gradient(180deg, #ffffff 0%, #eef5ff 100%);
+      border: 1px solid rgba(17, 34, 68, 0.08);
+      box-shadow: 0 20px 48px rgba(15, 23, 42, 0.08);
+    }
+
+    .compare-list {
+      display: grid;
+      gap: 14px;
+      padding: 0;
+      margin: 22px 0 0;
+      list-style: none;
+    }
+
+    .compare-list li {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(17, 34, 68, 0.06);
+    }
+
+    .compare-list strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .mini-card {
+      padding: 24px;
+      border-radius: 24px;
+      background: #fff;
+      border: 1px solid rgba(17, 34, 68, 0.08);
+      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.07);
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+      letter-spacing: -0.03em;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .shot {
+      padding: 14px;
+      border-radius: 26px;
+      background: linear-gradient(180deg, #fff 0%, #eef4ff 100%);
+      border: 1px solid rgba(17, 34, 68, 0.08);
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+    }
+
+    .shot img {
+      border-radius: 22px;
+      aspect-ratio: 9 / 19.5;
+      object-fit: cover;
+      background: #d9e4ff;
+    }
+
+    .shot-title {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .shot-copy {
+      margin-top: 4px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      padding: 28px;
+      border-radius: var(--radius-xl);
+      background: var(--surface-strong);
+      border: 1px solid rgba(17, 34, 68, 0.06);
+      box-shadow: 0 18px 44px rgba(15, 23, 42, 0.07);
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    details {
+      border: 1px solid rgba(17, 34, 68, 0.08);
+      border-radius: 18px;
+      padding: 16px 18px;
+      background: #fbfdff;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      font-weight: 700;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details p {
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .support-actions {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .support-link {
+      display: block;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%);
+      border: 1px solid rgba(17, 34, 68, 0.08);
+      font-weight: 700;
+    }
+
+    .support-link small {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .privacy-copy {
+      color: var(--muted);
+    }
+
+    .privacy-copy p,
+    .privacy-copy li {
+      margin: 0 0 12px;
+    }
+
+    .policy-block + .policy-block {
+      margin-top: 26px;
+      padding-top: 26px;
+      border-top: 1px solid rgba(17, 34, 68, 0.08);
+    }
+
+    .policy-block h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .policy-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .policy-meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .cta-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 38px;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at top left, rgba(245, 158, 11, 0.18), transparent 24%),
+        radial-gradient(circle at right, rgba(31, 111, 255, 0.18), transparent 28%),
+        linear-gradient(135deg, #10213a 0%, #14345c 100%);
+      color: #fff;
+      box-shadow: 0 28px 56px rgba(15, 23, 42, 0.2);
+    }
+
+    .cta-panel p {
+      max-width: 58ch;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .cta-panel .cta-row {
+      margin-top: 24px;
+    }
+
+    .cta-panel .store-link {
+      background: #fff;
+      color: var(--text);
+      box-shadow: none;
+    }
+
+    .cta-panel .button {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .footer {
+      padding: 26px 0 46px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(17, 34, 68, 0.08);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .support-grid,
+      .flow-grid,
+      .compare-layout,
+      .feature-grid,
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-grid {
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-header {
+        position: static;
+      }
+
+      .site-header .shell,
+      .section-head,
+      .footer-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .hero-grid,
+      .feature-grid,
+      .flow-grid,
+      .gallery,
+      .compare-layout,
+      .mini-grid,
+      .support-grid,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        max-width: none;
+      }
+
+      .hero-stack {
+        min-height: 480px;
+      }
+
+      .phone {
+        width: min(54vw, 250px);
+      }
+
+      .phone.one {
+        left: 0;
+        top: 16%;
+      }
+
+      .phone.three {
+        right: 0;
+        bottom: 2%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell">
+      <a class="brand" href="#top" aria-label="Domov Košíq">
+        <img src="assets/icon-ios-1024.png" alt="Ikona aplikácie Košíq">
+        <span>Košíq</span>
+      </a>
+      <nav class="nav" aria-label="Hlavná navigácia">
+        <a href="#features">Funkcie</a>
+        <a href="#how-it-works">Ako to funguje</a>
+        <a href="#screens">Obrazovky</a>
+        <a href="#support">Podpora</a>
+        <a href="#privacy-policy">Súkromie</a>
+        <a class="nav-cta" href="https://apps.apple.com/" target="_blank" rel="noreferrer">Stiahnuť v App Store</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">Vytvorené pre plánovanie nákupov na iPhone</div>
+          <h1>Nakupujte rozumnejšie so zoznamom, ktorý pozná ceny.</h1>
+          <p>
+            Košíq pomáha porovnávať ceny potravín naprieč obchodmi, vytvárať prehľadné nákupné zoznamy
+            a vracať sa k predchádzajúcim zoznamom, keď je čas nakúpiť znova. Je rýchly, sústredený
+            a navrhnutý pre rytmus bežných nákupov v supermarkete.
+          </p>
+          <div class="hero-points" aria-label="Hlavné výhody">
+            <span class="hero-point">Vyhľadávajte produkty naprieč obchodmi</span>
+            <span class="hero-point">Pridávajte vlastné položky za pár sekúnd</span>
+            <span class="hero-point">Archivujte a znovu otvárajte hotové zoznamy</span>
+          </div>
+          <div class="cta-row">
+            <a class="store-link" href="https://apps.apple.com/" target="_blank" rel="noreferrer">
+              Stiahnuť v App Store
+            </a>
+            <a class="button" href="#how-it-works">Pozrieť, ako to funguje</a>
+          </div>
+          <p class="microcopy">
+            Všetko dôležité pre váš ďalší nákup na jednom mieste.
+          </p>
+          <div class="hero-note">
+            <strong>Postavené na reálnych produktových dátach a ľahkej správe zoznamov.</strong>
+            Aplikácia udržiava celý tok jednoduchý: hľadať, pridať, nakúpiť, archivovať, zopakovať.
+          </div>
+          <div class="stats" aria-label="Hlavné benefity">
+            <div class="stat">
+              <strong>Porovnávajte ceny</strong>
+              <span>Vidíte produkty z viacerých obchodov na jednom mieste.</span>
+            </div>
+            <div class="stat">
+              <strong>Tvorte zoznamy rýchlo</strong>
+              <span>Pridajte produkty alebo vlastné položky na pár ťuknutí.</span>
+            </div>
+            <div class="stat">
+              <strong>Uchovajte históriu</strong>
+              <span>Archivujte dokončené zoznamy a vráťte sa k nim neskôr.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card reveal" aria-hidden="true">
+          <div class="hero-stack">
+            <div class="phone one">
+              <img src="assets/onboarding.jpg" alt="">
+            </div>
+            <div class="phone two">
+              <img src="assets/search.jpg" alt="">
+            </div>
+            <div class="phone three">
+              <img src="assets/list.jpg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <span class="section-label">Hlavné funkcie</span>
+            <h2>Všetko, čo potrebujete pre pokojnejší nákup</h2>
+          </div>
+          <p>
+            Košíq spája prehľadnosť, rýchlosť a praktickosť do jedného jednoduchého nákupného toku,
+            v ktorom sa nestratíte ani počas bežného týždňového nákupu.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature reveal">
+            <div class="feature-badge">01</div>
+            <h3>Vyhľadávanie produktov naprieč obchodmi</h3>
+            <p>Hľadajte produkty a porovnávajte relevantné ponuky medzi obchodmi bez preskakovania medzi aplikáciami či letákmi.</p>
+          </article>
+          <article class="feature reveal">
+            <div class="feature-badge">02</div>
+            <h3>Jednoduchá správa nákupného zoznamu</h3>
+            <p>Pridávajte ocenené produkty alebo vlastné položky, organizujte si zoznam a udržte nákupný proces ľahký.</p>
+          </article>
+          <article class="feature reveal">
+            <div class="feature-badge">03</div>
+            <h3>História nákupov na prvý pohľad</h3>
+            <p>Archivujte dokončené zoznamy a vracajte sa k predchádzajúcim nákupom pri plánovaní ďalšej cesty do obchodu.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <span class="section-label">Ako to funguje</span>
+            <h2>Od nápadu po pokladňu v troch pokojných krokoch</h2>
+          </div>
+          <p>
+            Košíq funguje najlepšie vtedy, keď je celý proces jasný. Tieto tri kroky priamo zodpovedajú tomu, ako je aplikácia dnes postavená.
+          </p>
+        </div>
+        <div class="flow-grid">
+          <article class="flow-step reveal">
+            <div class="flow-index">1</div>
+            <h3>Vyhľadajte produkty</h3>
+            <p>Začnite názvom produktu alebo kategóriou a prechádzajte aktuálne dostupné ponuky obchodov v jednom sústredenom toku.</p>
+          </article>
+          <article class="flow-step reveal">
+            <div class="flow-index">2</div>
+            <h3>Vytvorte svoj zoznam</h3>
+            <p>Pridajte nájdené produkty alebo vlastné položky, upravte množstvá a pripravte si zoznam na ďalšiu návštevu obchodu.</p>
+          </article>
+          <article class="flow-step reveal">
+            <div class="flow-index">3</div>
+            <h3>Archivujte hotové nákupy</h3>
+            <p>Keď je nákup hotový, archivujte zoznam a zachovajte si ľahkú históriu, ku ktorej sa môžete neskôr vrátiť.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="benefits">
+      <div class="shell compare-layout">
+        <div class="compare-copy reveal">
+          <span class="section-label">Prečo pôsobí inak</span>
+          <h3>Menej chaosu, menej ťuknutí a jasnejší prehľad o tom, čo kúpiť ďalej.</h3>
+          <p>
+            Namiesto snahy byť obrovským nákupným ekosystémom sa Košíq sústreďuje na jeden užitočný cyklus:
+            objaviť produkty, vytvoriť praktický zoznam a zachovať kontinuitu cez históriu zoznamov.
+          </p>
+          <ul class="compare-list">
+            <li>
+              <strong>Nákupný tok postavený na produktoch</strong>
+              Hľadajte a pridávajte z reálnych výsledkov produktov namiesto ručného vypisovania každej položky.
+            </li>
+            <li>
+              <strong>Záloha pre reálny život</strong>
+              Ak produkt chýba, vlastné položky udržia nákup v pohybe bez zablokovania na vyhľadávaní.
+            </li>
+            <li>
+              <strong>História, ktorá ostáva užitočná</strong>
+              Archivované zoznamy pomáhajú opakovať bežné nákupy bez toho, aby ste každý týždeň skladali rovnaký plán odznova.
+            </li>
+          </ul>
+        </div>
+        <div class="mini-grid">
+          <article class="mini-card reveal">
+            <strong>Rýchly onboarding</strong>
+            <p>Celý zážitok je navrhnutý tak, aby používateľov dostal do aplikácie rýchlo namiesto zbytočného úvodného nastavovania.</p>
+          </article>
+          <article class="mini-card reveal">
+            <strong>Informácia o aktuálnosti dát</strong>
+            <p>Vyhľadávanie produktov môže zobrazovať čas poslednej aktualizácie, aby mali používatelia kontext k dátam, ktoré vidia.</p>
+          </article>
+          <article class="mini-card reveal">
+            <strong>Štruktúra vhodná pre podporu</strong>
+            <p>Pomoc aj dôležité informácie sú vždy poruke, takže sa k nim dostanete bez zbytočného hľadania.</p>
+          </article>
+          <article class="mini-card reveal">
+            <strong>Postavené z reálnych assetov aplikácie</strong>
+            <p>To, čo vidíte na stránke, zodpovedá tomu, čo vás čaká aj priamo v aplikácii.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="screens">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <span class="section-label">Obrazovky</span>
+            <h2>Nazrite do aplikácie ešte pred prvým nákupom</h2>
+          </div>
+          <p>
+            Každá obrazovka ukazuje, ako jednoducho sa dá prejsť od vyhľadávania až po hotový nákupný zoznam.
+          </p>
+        </div>
+        <div class="gallery">
+          <figure class="shot reveal">
+            <img src="assets/onboarding.jpg" alt="Obrazovka onboardingu aplikácie Košíq">
+            <figcaption class="shot-title">Uvítací tok</figcaption>
+            <div class="shot-copy">Predstavte aplikáciu v niekoľkých rýchlych krokoch ešte pred prvým zoznamom.</div>
+          </figure>
+          <figure class="shot reveal">
+            <img src="assets/search.jpg" alt="Obrazovka vyhľadávania produktov v Košíq">
+            <figcaption class="shot-title">Hľadať a porovnávať</figcaption>
+            <div class="shot-copy">Nájdite produkty, filtrujte výsledky a pridávajte položky s menším trením.</div>
+          </figure>
+          <figure class="shot reveal">
+            <img src="assets/list.jpg" alt="Obrazovka nákupného zoznamu v Košíq">
+            <figcaption class="shot-title">Prehľadný zoznam</figcaption>
+            <div class="shot-copy">Udržte aktuálny nákupný zoznam čistý, upraviteľný a ľahko čitateľný.</div>
+          </figure>
+          <figure class="shot reveal">
+            <img src="assets/history.jpg" alt="Obrazovka histórie nákupov v Košíq">
+            <figcaption class="shot-title">História zoznamov</figcaption>
+            <div class="shot-copy">Pozrite si predchádzajúce nákupy a znovu využite svoje nákupné návyky v čase.</div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="support">
+      <div class="shell support-grid">
+        <div class="card">
+          <div class="section-head">
+            <div>
+              <span class="section-label">Podpora</span>
+              <h2>Podpora</h2>
+            </div>
+            <p>Jasné odpovede a priame možnosti kontaktu znižujú trenie pred aj po inštalácii.</p>
+          </div>
+          <div class="faq-list">
+            <details open>
+              <summary>S čím mi Košíq pomáha?</summary>
+              <p>Košíq vám pomáha porovnávať potraviny, vytvárať nákupné zoznamy a uchovávať históriu dokončených zoznamov priamo na iPhone.</p>
+            </details>
+            <details>
+              <summary>Potrebujem na používanie aplikácie účet?</summary>
+              <p>Aplikácia je navrhnutá tak, aby onboarding ostal ľahký. Podľa nastavenia vydania môžete byť pre funkčnosť aplikácie automaticky prihlásený na pozadí.</p>
+            </details>
+            <details>
+              <summary>Môžem pridať aj vlastné položky?</summary>
+              <p>Áno. Ak sa produkt nenájde, môžete z vyhľadávania pridať vlastnú položku a pokračovať v tvorbe zoznamu bez prerušenia.</p>
+            </details>
+            <details>
+              <summary>Ako často sa aktualizujú ceny?</summary>
+              <p>Produktové dáta môžu v aplikácii zobrazovať čas poslednej aktualizácie. Skutočná frekvencia obnovy závisí od dátového zdroja použitého v aktuálnom vydaní.</p>
+            </details>
+            <details>
+              <summary>Ako získam pomoc alebo nahlásim problém?</summary>
+              <p>Použite odkaz na podporu nižšie a priložte model zariadenia, verziu iOS a krátky popis problému, aby tím vedel pomôcť rýchlejšie.</p>
+            </details>
+          </div>
+        </div>
+
+        <aside class="card reveal">
+          <h2 style="margin-top: 0;">Kontakt a právne informácie</h2>
+          <p style="color: var(--muted); margin-bottom: 0;">
+            Ak potrebujete pomoc alebo si chcete prečítať dôležité informácie, všetko nájdete prehľadne na jednom mieste.
+          </p>
+          <div class="support-actions">
+            <a class="support-link" href="mailto:lukas.bakuliak@gmail.com">
+              Kontaktovať podporu
+              <small>Napíšte podpore kvôli pomoci, nahláseniu chýb alebo partnerským otázkam.</small>
+            </a>
+            <a class="support-link" href="#privacy-policy">
+              Zásady ochrany súkromia
+              <small>Prejdite na sekciu o súkromí na tejto stránke.</small>
+            </a>
+            <a class="support-link" href="https://apps.apple.com/" target="_blank" rel="noreferrer">
+              Stiahnuť v App Store
+              <small>Prejdite priamo na stránku aplikácie a stiahnite si Košíq do iPhonu.</small>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="privacy-policy">
+      <div class="shell">
+        <div class="card privacy-copy reveal">
+          <div class="section-head">
+            <div>
+              <span class="section-label">Súkromie</span>
+              <h2>Zásady ochrany súkromia</h2>
+            </div>
+            <p>Vaše súkromie berieme vážne a informácie o spracovaní údajov chceme držať jasné, konkrétne a zrozumiteľné.</p>
+          </div>
+          <p class="policy-meta">Posledná aktualizácia: 31. marec 2026</p>
+
+          <div class="policy-block">
+            <h3>1. Kto prevádzkuje aplikáciu</h3>
+            <p>Košíq je mobilná aplikácia určená na vyhľadávanie produktov, porovnávanie cien a správu nákupných zoznamov. Prevádzkovateľ aplikácie je dostupný cez <a href="mailto:lukas.bakuliak@gmail.com" style="color: var(--brand-strong); font-weight: 700;">odkaz na podporu</a>.</p>
+          </div>
+
+          <div class="policy-block">
+            <h3>2. Aké údaje aplikácia spracúva</h3>
+            <p>Aplikácia môže spracúvať údaje, ktoré sú potrebné na jej fungovanie, najmä:</p>
+            <ul class="policy-list">
+              <li>obsah nákupných zoznamov, vrátane názvu položky, množstva, ceny, kategórie a obchodu,</li>
+              <li>archivované zoznamy a históriu nákupov,</li>
+              <li>technické identifikátory a údaje potrebné na anonymné prihlásenie a načítanie produktových dát.</li>
+            </ul>
+          </div>
+
+          <div class="policy-block">
+            <h3>3. Ako sa údaje používajú</h3>
+            <p>Údaje sa používajú výhradne na poskytovanie funkcií aplikácie, najmä na ukladanie zoznamov, zobrazovanie histórie, načítanie ponuky produktov a zabezpečenie spoľahlivého fungovania aplikácie. Košíq nepredáva osobné údaje používateľov tretím stranám.</p>
+          </div>
+
+          <div class="policy-block">
+            <h3>4. Lokálne ukladanie údajov</h3>
+            <p>Nákupné zoznamy, história nákupov a informácia o poslednej aktualizácii produktov sa ukladajú lokálne v zariadení používateľa. Tieto údaje zostávajú viazané na zariadenie, pokiaľ ich používateľ neodstráni alebo nevymaže aplikáciu.</p>
+          </div>
+
+          <div class="policy-block">
+            <h3>5. Online služby a tretie strany</h3>
+            <p>Košíq používa služby Firebase Authentication a Cloud Firestore na anonymné prihlásenie a načítanie produktových dát. To znamená, že pri používaní aplikácie môže dochádzať k prenosu technických údajov potrebných na overenie relácie, komunikáciu so serverom a doručenie obsahu. Spracovanie týchto údajov sa zároveň riadi aj zásadami ochrany súkromia príslušných poskytovateľov služieb.</p>
+          </div>
+
+          <div class="policy-block">
+            <h3>6. Právny základ spracúvania</h3>
+            <p>Údaje sa spracúvajú v rozsahu nevyhnutnom na poskytovanie funkcionality aplikácie a na jej bezpečnú prevádzku. Ak nás kontaktujete cez e-mail alebo odkaz na podporu, poskytnuté kontaktné údaje sa použijú len na vybavenie vašej otázky alebo požiadavky.</p>
+          </div>
+
+          <div class="policy-block">
+            <h3>7. Doba uchovávania</h3>
+            <p>Lokálne uložené údaje zostávajú v aplikácii dovtedy, kým ich neodstránite vy alebo kým neodstránite aplikáciu zo zariadenia. Údaje odoslané cez podporu sa uchovávajú len počas času potrebného na vybavenie komunikácie a prípadných súvisiacich povinností.</p>
+          </div>
+
+          <div class="policy-block">
+            <h3>8. Vaše práva</h3>
+            <p>V závislosti od rozsahu spracúvania môžete mať právo požiadať o prístup k údajom, ich opravu, vymazanie, obmedzenie spracúvania alebo podať námietku. Ak sa domnievate, že s údajmi nie je nakladané v súlade s právnymi predpismi, môžete sa obrátiť aj na príslušný dozorný orgán.</p>
+          </div>
+
+          <div class="policy-block">
+            <h3>9. Zmeny týchto zásad</h3>
+            <p>Tieto zásady ochrany súkromia môžeme priebežne aktualizovať, ak sa zmenia funkcie aplikácie alebo spôsob spracúvania údajov. Na tejto stránke bude vždy dostupná aktuálna verzia s dátumom poslednej aktualizácie.</p>
+          </div>
+
+          <div class="policy-block">
+            <h3>10. Kontakt</h3>
+            <p>Ak máte otázky k súkromiu alebo spracúvaniu údajov v aplikácii Košíq, kontaktujte nás cez <a href="mailto:lukas.bakuliak@gmail.com" style="color: var(--brand-strong); font-weight: 700;">odkaz na podporu</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="cta-panel reveal">
+          <span class="section-label" style="color: var(--ink-soft);">Košíq</span>
+          <h2>Majte svoj nákup pod kontrolou od prvého ťuknutia.</h2>
+          <p>
+            Vyhľadajte produkty, vytvorte si zoznam a vracajte sa k tomu, čo nakupujete najčastejšie.
+            Košíq robí z bežného nákupu rýchlejší a pokojnejší zvyk.
+          </p>
+          <div class="cta-row">
+            <a class="store-link" href="https://apps.apple.com/" target="_blank" rel="noreferrer">Stiahnuť v App Store</a>
+            <a class="button" href="#support">Potrebujete pomoc?</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-row">
+      <div>© 2026 Košíq. Všetky práva vyhradené.</div>
+      <div>
+        <a href="#support">Podpora</a> ·
+        <a href="#privacy-policy">Zásady ochrany súkromia</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+  </script>
+</body>
+</html>
