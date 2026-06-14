@@ -103,6 +103,26 @@
       color: var(--ink);
     }
 
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #64748b;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .lang-switch a {
+      padding: 6px 8px;
+      border-radius: 999px;
+    }
+
+    .lang-switch a.active {
+      background: white;
+      color: var(--ink);
+      box-shadow: 0 8px 20px rgba(17, 24, 39, .06);
+    }
+
     .button {
       display: inline-flex;
       align-items: center;
@@ -749,6 +769,10 @@
         display: none;
       }
 
+      .lang-switch {
+        margin-left: auto;
+      }
+
       .hero-grid,
       .support-grid,
       .cta-panel {
@@ -844,6 +868,11 @@
         <a href="#support">Podpora</a>
         <a href="#privacy">Privacy</a>
       </nav>
+      <div class="lang-switch" aria-label="Language">
+        <a href="?lang=sk" data-lang-link="sk">SK</a>
+        <span>/</span>
+        <a href="?lang=en" data-lang-link="en">EN</a>
+      </div>
       <a class="button primary" href="https://apps.apple.com/" aria-label="Stiahnuť Levela v App Store">App Store</a>
     </div>
   </header>
@@ -1189,6 +1218,147 @@
   </footer>
 
   <script>
+    const params = new URLSearchParams(window.location.search);
+    const lang = params.get('lang') === 'en' ? 'en' : 'sk';
+
+    document.querySelectorAll('[data-lang-link]').forEach((link) => {
+      link.classList.toggle('active', link.dataset.langLink === lang);
+    });
+
+    const en = {
+      title: 'Levela | Workout journal for progressive overload',
+      description: 'Levela is an iPhone workout journal for strength progress, hypertrophy, progressive overload, training volume and workout plans.',
+      text: {
+        '.nav-links a:nth-child(1)': 'Features',
+        '.nav-links a:nth-child(2)': 'How it works',
+        '.nav-links a:nth-child(3)': 'Screens',
+        '.nav-links a:nth-child(4)': 'Support',
+        '.site-header .button.primary': 'App Store',
+        '.hero .eyebrow': 'Workout journal for iPhone',
+        '.hero h1': 'Track progress. Train smarter.',
+        '.hero-copy': 'Levela helps you log workouts, follow strength progress, plan training, and make decisions from your data.',
+        '.hero-actions .button.primary': 'Download on the App Store',
+        '.hero-actions .button:nth-child(2)': 'View features',
+        '.keyword-row .pill:nth-child(1)': 'Muscle hypertrophy',
+        '.keyword-row .pill:nth-child(2)': 'Progressive overload',
+        '.keyword-row .pill:nth-child(3)': 'Estimated 1RM',
+        '.keyword-row .pill:nth-child(4)': 'Workout plans',
+        '.start-card strong': 'Start workout',
+        '.metric:nth-child(1) small': 'Strength progress',
+        '.metric:nth-child(2) small': 'Effective sets',
+        '.metric:nth-child(3) small': 'Recovery',
+        '.metric:nth-child(4) small': 'Volume',
+        '.bottom-nav span:nth-child(3)': 'Exercises',
+        '.stat:nth-child(1) span': 'estimated strength max',
+        '.stat:nth-child(2) b': 'Volume',
+        '.stat:nth-child(2) span': 'tonnage and working sets',
+        '.stat:nth-child(3) b': 'Plans',
+        '.stat:nth-child(3) span': 'training without improvising',
+        '.stat:nth-child(4) span': 'data ready to take out',
+        '#features .section-head h2': 'Features for training with direction.',
+        '#features .section-head p': 'Levela is a practical tool for people who want to know what they train, why they train it, and whether they are improving.',
+        '.feature-card:nth-child(1) h3': 'Strength progress and estimated 1RM',
+        '.feature-card:nth-child(1) p': 'Track working weights, reps, personal records, and estimated maxes without manual calculations after every set.',
+        '.feature-card:nth-child(2) h3': 'Hypertrophy in data',
+        '.feature-card:nth-child(2) p': 'Training volume and effective sets help you distribute stimulus across muscle groups.',
+        '.feature-card:nth-child(3) h3': 'Progressive overload',
+        '.feature-card:nth-child(3) p': 'Levela shows where it makes sense to add weight, reps, or volume so training keeps moving.',
+        '.feature-card:nth-child(4) h3': 'Coach Mode',
+        '.feature-card:nth-child(4) p': 'Switch between clients and keep training records for coaches who need a fast overview.',
+        '.feature-card:nth-child(5) h3': 'Workout plans',
+        '.feature-card:nth-child(5) p': 'Prepare workouts ahead of time, open the plan in the gym, and log sets without searching around.',
+        '.feature-card:nth-child(6) h3': 'Data export',
+        '.feature-card:nth-child(6) p': 'Export workouts and progress for your own analysis, backup, or sharing with a coach.',
+        '#how .section-head h2': 'A simple workflow from the first set to the long-term trend.',
+        '#how .section-head p': 'The app is designed to stay out of the way during training. Log quickly, then review context after the workout.',
+        '.step:nth-child(1) h3': 'Log sets',
+        '.step:nth-child(1) p': 'Pick a workout, add weight and reps. Levela keeps recent values nearby so logging stays quick.',
+        '.step:nth-child(2) h3': 'Track trends',
+        '.step:nth-child(2) p': 'Review performance, volume, and exercise history over time. One weaker set is not the point; the trend is.',
+        '.step:nth-child(3) h3': 'Adjust training',
+        '.step:nth-child(3) p': 'Use the data to decide when to add load, reduce volume, or change the plan.',
+        '#screens .section-head h2': 'Clear screens without training noise.',
+        '#screens .section-head p': 'Dashboard, workouts, and exercises are built around the decisions you make most often in the gym.',
+        '.screen-card:nth-child(1) h3': 'Dashboard',
+        '.screen-card:nth-child(1) .mini-item:nth-child(2)': 'Today’s plan <span>Upper</span>',
+        '.screen-card:nth-child(1) .mini-item:nth-child(3)': 'Weekly volume <span>32.6t</span>',
+        '.screen-card:nth-child(1) .mini-item:nth-child(4)': 'Next target <span>Bench +2.5</span>',
+        '.screen-card:nth-child(2) h3': 'Workout',
+        '.screen-card:nth-child(3) h3': 'Exercises and history',
+        '#support .section-head h2': 'Support',
+        '#support .section-head p': 'If something is not working, you are missing an important feature, or you want to send feedback, get in touch.',
+        '.support-grid aside h3': 'Contact',
+        '.support-grid aside p': 'The fastest way is email. Include your iPhone model, iOS version, and a short description of the issue.',
+        '.contact-item:nth-child(1) span:nth-child(1)': 'Contact support',
+        '.contact-item:nth-child(1) span:nth-child(2)': 'Email',
+        '.contact-item:nth-child(2) span:nth-child(2)': 'Open',
+        '.contact-item:nth-child(3) span:nth-child(2)': 'View',
+        '.support-card details:nth-child(1) summary': 'What does Levela help with?',
+        '.support-card details:nth-child(1) p': 'Logging workouts, tracking progress, comparing exercise history, planning workouts, and making progressive overload decisions.',
+        '.support-card details:nth-child(2) summary': 'Is Levela suitable for beginners?',
+        '.support-card details:nth-child(2) p': 'Yes. The core workflow is simple set logging and trend review.',
+        '.support-card details:nth-child(3) summary': 'Does the app work without an account?',
+        '.support-card details:nth-child(3) p': 'The current concept is local and practical: workout data is stored in the app on the device, without requiring an account.',
+        '.support-card details:nth-child(4) summary': 'How do I export data?',
+        '.support-card details:nth-child(4) p': 'Export is for backup, personal analysis, or sharing with a coach.',
+        '.support-card details:nth-child(5) summary': 'How do I report a bug?',
+        '.support-card details:nth-child(5) p': 'Send an email with a short description, screenshot, and the steps that caused the issue.',
+        '#privacy .section-head h2': 'Privacy',
+        '#privacy .section-head p': 'Privacy policy for the Levela app. Last updated: June 14, 2026.',
+        '.privacy h3:nth-of-type(1)': '1. Operator',
+        '.privacy p:nth-of-type(1)': 'Levela is operated by Lukas Kubaliak. For privacy or support questions, contact us using the support button on this page.',
+        '.privacy h3:nth-of-type(2)': '2. What data the app processes',
+        '.privacy p:nth-of-type(2)': 'Levela may process data you enter while using the workout journal:',
+        '.privacy li:nth-child(1)': 'workout records, sets, weights, reps, notes, and workout dates,',
+        '.privacy li:nth-child(2)': 'exercise lists, workout plans, performance history, and derived metrics such as volume or estimated 1RM,',
+        '.privacy li:nth-child(3)': 'profile data created in the app, such as a client name in Coach Mode,',
+        '.privacy li:nth-child(4)': 'exported files if you decide to export or share data.',
+        '.privacy h3:nth-of-type(3)': '3. How data is used',
+        '.privacy p:nth-of-type(3)': 'Data is used to show workout history, calculate progress metrics, plan training, track progressive overload, and improve practical app use.',
+        '.privacy h3:nth-of-type(4)': '4. Data storage',
+        '.privacy p:nth-of-type(4)': 'The current version is designed as a local workout journal. Data is stored on the user’s device. If sync, analytics, or cloud features are added later, this policy will be updated before use.',
+        '.privacy h3:nth-of-type(5)': '5. Sharing and export',
+        '.privacy p:nth-of-type(5)': 'Levela does not sell user workout data. If you use export or iOS system sharing, you decide where the exported file is sent and who can access it.',
+        '.privacy h3:nth-of-type(6)': '6. Third parties',
+        '.privacy p:nth-of-type(6)': 'This website does not contain tracking scripts. The app may use Apple system services needed for iOS app functionality and App Store distribution.',
+        '.privacy h3:nth-of-type(7)': '7. Health notice',
+        '.privacy p:nth-of-type(7)': 'Levela is not a medical device and does not provide medical diagnosis. Training suggestions and metrics are informational. Consult a professional if you have health issues or pain.',
+        '.privacy h3:nth-of-type(8)': '8. Retention and deletion',
+        '.privacy p:nth-of-type(8)': 'Data remains in the app until you delete it or remove the app from the device. Exported files must be managed separately where they were saved or sent.',
+        '.privacy h3:nth-of-type(9)': '9. User rights',
+        '.privacy p:nth-of-type(9)': 'If you have questions about your data, want to report a problem, or need an explanation of how the app works, contact us by email. For locally stored data, the user has direct control over the data on the device.',
+        '.privacy h3:nth-of-type(10)': '10. Policy changes',
+        '.privacy p:nth-of-type(10)': 'This privacy policy may be updated when app features change, for example if sync, accounts, subscriptions, or analytics are introduced.',
+        '.cta-panel h2': 'Levela is for training you want to improve.',
+        '.cta-panel p': 'Log workouts quickly, track progress clearly, and take the next step from data, not from the feeling of the last set.',
+        '.cta-panel .button': 'Download on the App Store',
+        '.site-footer .footer-row > div:first-child': '© 2026 Levela. All rights reserved.',
+        '.footer-links a:nth-child(1)': 'Support',
+        '.footer-links a:nth-child(3)': 'Contact'
+      }
+    };
+
+    if (lang === 'en') {
+      document.documentElement.lang = 'en';
+      document.title = en.title;
+      document.querySelector('meta[name="description"]').setAttribute('content', en.description);
+      Object.entries(en.text).forEach(([selector, value]) => {
+        const element = document.querySelector(selector);
+        if (!element) return;
+        if (value.includes('<')) {
+          element.innerHTML = value;
+        } else {
+          element.textContent = value;
+        }
+      });
+      document.querySelector('.brand').setAttribute('aria-label', 'Levela home');
+      document.querySelector('.nav-links').setAttribute('aria-label', 'Main navigation');
+      document.querySelector('.site-header .button.primary').setAttribute('aria-label', 'Download Levela on the App Store');
+      document.querySelector('.keyword-row').setAttribute('aria-label', 'Main app areas');
+      document.querySelector('.phone-wrap').setAttribute('aria-label', 'Levela app preview');
+      document.querySelector('.stats').setAttribute('aria-label', 'App value overview');
+    }
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
