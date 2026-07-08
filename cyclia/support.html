@@ -1,185 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="sk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="page-title">Support — Cyclia</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Podpora | Cyclia</title>
+  <meta name="description" content="Podpora pre aplikáciu Cyclia. Pomoc s predplatným, súkromím a kontaktom.">
+  <meta name="theme-color" content="#F4F0E8">
+  <link rel="icon" href="assets/icon-ios-512.jpg" type="image/jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-period: #F2B1C9;
-      --accent-red: #EC0150;
-      --background: #FEFEFF;
-      --surface: #FFFFFF;
-      --on-primary: #1a1a1a;
-      --on-surface-high: #2F2F2F;
-      --on-surface-muted: #6B6B6B;
-      --shadow: rgba(0, 0, 0, 0.06);
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--background);
-      color: var(--on-primary);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    .container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
-    .back { margin-bottom: 32px; }
-    .back a {
-      color: var(--on-surface-muted);
-      text-decoration: none;
-      font-size: 0.95rem;
-    }
-    .back a:hover { color: var(--accent-red); text-decoration: underline; }
-
-    h1 { font-size: 2rem; margin: 0 0 12px; font-weight: 700; }
-    .subtitle { font-size: 1.1rem; color: var(--on-surface-muted); margin-bottom: 40px; }
-
-    /* FAQ Section */
-    .faq-section { margin-bottom: 48px; }
-    .faq-item { margin-bottom: 24px; }
-    .faq-item h3 { font-size: 1.1rem; margin: 0 0 8px; font-weight: 600; }
-    .faq-item p { margin: 0; color: var(--on-surface-high); }
-
-    /* Contact Card */
-    .contact-card {
-      background: var(--surface);
-      padding: 32px;
-      border-radius: 24px;
-      box-shadow: 0 8px 32px var(--shadow);
-      margin-top: 40px;
-      text-align: center;
-    }
-    
-    .contact-btn {
-      display: inline-block;
-      background: var(--accent-red);
-      color: white;
-      text-decoration: none;
-      padding: 16px 32px;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-top: 16px;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-    .contact-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-    .contact-btn:active { transform: translateY(0); }
-
-    .footer-links {
-      margin-top: 64px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(0,0,0,0.06);
-      font-size: 0.9rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .footer-links a {
-      color: var(--on-surface-muted);
-      text-decoration: none;
-    }
-    .footer-links a:hover { color: var(--accent-red); text-decoration: underline; }
-
-    .lang-switcher { font-size: 0.85rem; color: var(--on-surface-muted); }
-    .lang-switcher a { color: var(--on-surface-muted); text-decoration: none; }
-    .lang-switcher a:hover { text-decoration: underline; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@450;550;650;750;850&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/site.css">
 </head>
-<body>
-  <div class="container">
-    <nav class="back">
-      <a href="index.html" data-i18n="back_link">← Back to Cyclia</a>
-    </nav>
-
-    <h1 data-i18n="title">Support</h1>
-    <p class="subtitle" data-i18n="subtitle">How can we help you today?</p>
-
-    <div class="faq-section">
-      <div class="faq-item">
-        <h3 data-i18n="faq1_q">How is my data handled?</h3>
-        <p data-i18n="faq1_a">Cyclia works entirely offline. Your data never leaves your device and we have no access to it.</p>
-      </div>
-      <div class="faq-item">
-        <h3 data-i18n="faq2_q">How do I cancel my subscription?</h3>
-        <p data-i18n="faq2_a">Subscriptions are managed by Apple. You can cancel anytime in your iPhone Settings > Apple ID > Subscriptions.</p>
+<body style="--app:#be185d;--app-soft:#fce7f3">
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-icon"><img src="assets/icon-ios-512.jpg" alt=""></span>
+        <span>Cyclia</span>
+      </a>
+      <nav class="nav-links" aria-label="Hlavná navigácia">
+        <a href="index.html">Domov</a>
+        <a href="tos.html">Podmienky</a>
+        <a href="privacy.html">Súkromie</a>
+      </nav>
+      <div class="language-switch" aria-label="Výber jazyka">
+        <button type="button" data-lang="sk">SK</button>
+        <button type="button" data-lang="en">EN</button>
       </div>
     </div>
+  </header>
 
-    <div class="contact-card">
-      <h2 style="font-size: 1.25rem; margin-top: 0;" data-i18n="contact_title">Still need help?</h2>
-      <p data-i18n="contact_desc">Send us an email and we'll get back to you as soon as possible.</p>
-      <a href="mailto:lukas.bakuliak@gmail.com" class="contact-btn" data-i18n="btn_email">Email Us</a>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Podpora</span>
+        <h1>Ako vám môžeme pomôcť?</h1>
+        <p class="lead">Najrýchlejšia cesta je e-mail. Pri chybe prosím priložte model iPhonu, verziu iOS a krátky popis situácie.</p>
+        <div class="actions">
+          <a class="button primary" href="mailto:lukas.bakuliak@gmail.com">Napísať podporu</a>
+          <a class="button" href="privacy.html">Prečítať súkromie</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="card faq">
+          <details open>
+            <summary>Ako Cyclia narába s údajmi?</summary>
+            <p>Cyclia je navrhnutá s dôrazom na lokálne používanie a bez zbytočného zberu údajov. Podrobnosti sú v zásadách ochrany súkromia.</p>
+          </details>
+          <details>
+            <summary>Ako zruším predplatné?</summary>
+            <p>Predplatné spravuje Apple. Zrušíte ho v nastaveniach iPhonu cez Apple ID a sekciu Predplatné.</p>
+          </details>
+          <details>
+            <summary>Je Cyclia zdravotnícka aplikácia?</summary>
+            <p>Nie. Cyclia poskytuje osobné záznamy a odhady. Pri zdravotných otázkach kontaktujte odborníka.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <div>© 2026 Cyclia</div>
+      <div class="footer-links">
+        <a href="index.html">Domov</a>
+        <a href="tos.html">Podmienky</a>
+        <a href="privacy.html">Súkromie</a>
+      </div>
     </div>
-
-    <nav class="footer-links">
-      <span class="lang-switcher">
-        <a href="support.html?lang=sk" data-lang="sk">SK</a> | <a href="support.html?lang=en" data-lang="en">EN</a>
-      </span>
-      <a href="index.html" data-i18n="footer_home">Home</a>
-      <a href="tos.html" data-i18n="footer_tos">Terms of Service</a>
-      <a href="privacy.html" data-i18n="footer_privacy">Privacy Policy</a>
-    </nav>
-  </div>
-
-  <script>
-    (function() {
-      var t = {
-        en: {
-          page_title: 'Support — Cyclia',
-          back_link: '← Back to Cyclia',
-          title: 'Support',
-          subtitle: 'How can we help you today?',
-          faq1_q: 'How is my data handled?',
-          faq1_a: 'Cyclia works entirely offline. Your data never leaves your device and we have no access to it.',
-          faq2_q: 'How do I cancel my subscription?',
-          faq2_a: 'Subscriptions are managed by Apple. You can cancel anytime in your iPhone Settings > Apple ID > Subscriptions.',
-          contact_title: 'Still need help?',
-          contact_desc: "Send us an email and we'll get back to you as soon as possible.",
-          btn_email: 'Email Us',
-          footer_home: 'Home',
-          footer_tos: 'Terms of Service',
-          footer_privacy: 'Privacy Policy'
-        },
-        sk: {
-          page_title: 'Podpora — Cyclia',
-          back_link: '← Späť na Cyclia',
-          title: 'Podpora',
-          subtitle: 'Ako vám môžeme pomôcť?',
-          faq1_q: 'Ako narábate s mojimi údajmi?',
-          faq1_a: 'Cyclia funguje plne offline. Vaše údaje nikdy neopúšťajú vaše zariadenie a my k nim nemáme prístup.',
-          faq2_q: 'Ako zruším predplatné?',
-          faq2_a: 'Predplatné spravuje spoločnosť Apple. Zrušiť ho môžete kedykoľvek v Nastaveniach iPhonu > Apple ID > Predplatné.',
-          contact_title: 'Stále potrebujete pomoc?',
-          contact_desc: 'Napíšte nám e-mail a my sa vám ozveme čo najskôr.',
-          btn_email: 'Napíšte nám',
-          footer_home: 'Domov',
-          footer_tos: 'Obchodné podmienky',
-          footer_privacy: 'Zásady ochrany súkromia'
-        }
-      };
-      function getLang() {
-        var params = new URLSearchParams(window.location.search);
-        var lang = params.get('lang') || (typeof localStorage !== 'undefined' && localStorage.getItem('cyclia-lang')) || 'en';
-        return lang === 'sk' ? 'sk' : 'en';
-      }
-      function setLang(lang) {
-        if (typeof localStorage !== 'undefined') localStorage.setItem('cyclia-lang', lang);
-        document.documentElement.lang = lang;
-        var L = t[lang];
-        document.querySelectorAll('[data-i18n]').forEach(function(el) {
-          var key = el.getAttribute('data-i18n');
-          if (L[key]) el.textContent = L[key];
-        });
-        var titleEl = document.getElementById('page-title');
-        if (titleEl) titleEl.textContent = L.page_title;
-      }
-      setLang(getLang());
-    })();
-  </script>
+  </footer>
+  <script src="../assets/i18n.js?v=2"></script>
 </body>
 </html>
