@@ -24,6 +24,11 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 92px;
+}
+
+[id] {
+  scroll-margin-top: 92px;
 }
 
 body {
@@ -1000,6 +1005,14 @@ h3 {
 }
 
 @media (max-width: 700px) {
+  html {
+    scroll-padding-top: 70px;
+  }
+
+  [id] {
+    scroll-margin-top: 70px;
+  }
+
   .container {
     width: min(var(--container), calc(100% - 28px));
   }
